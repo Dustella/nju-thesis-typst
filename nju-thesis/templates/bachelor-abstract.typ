@@ -27,7 +27,6 @@
     author: "张三",
     department: "某学院",
     major: "某专业",
-    supervisor: ("李四", "教授"),
   ) + info
 
   // 2.  对参数进行处理
@@ -48,40 +47,46 @@
 
   [
     #set text(font: fonts.楷体, size: 字号.小四)
+    
     #set par(leading: leading, justify: true)
     #show par: set block(spacing: spacing)
 
     // 标记一个不可见的标题用于目录生成
-    #invisible-heading(level: 1, outlined: outlined, outline-title)
+    // #invisible-heading(level: 1, outlined: outlined, outline-title)
 
+
+    // 标题
     #align(center)[
-      #set text(size: 字号.小二, weight: "bold")
-
-      #double-underline[南京大学本科生毕业论文（设计、作品）中文摘要]
+      #set text(size: 字号.三号, weight: "bold", font: fonts.黑体 )
+      #info-value("title", (("",)+ info.title).sum())
+      #v(字号.五号)
+    ]
+      
+    // 作者
+    #align(center)[
+      #set text(size: 字号.四号, font: fonts.宋体)
+      #info-value("author", info.author)
     ]
 
-    *题目*：#info-value("title", (("",)+ info.title).sum())
+    // 学院
+    #align(center)[
+      #set text(size: 字号.小五, font: fonts.宋体)
+      南京信息工程大学#info-value("department", info.department), 江苏 南京, 210044
+    ]
 
-    *院系*：#info-value("department", info.department)
-
-    *专业*：#info-value("major", info.major)
-
-    *本科生姓名*：#info-value("author", info.author)
-
-    *指导教师（姓名、职称）*：#info-value("supervisor", info.supervisor.at(0) + info.supervisor.at(1)) #(if info.supervisor-ii != () [#h(1em) #info-value("supervisor-ii", info.supervisor-ii.at(0) + info.supervisor-ii.at(1))])
-
-    *摘要*：
 
     #[
-      #set par(first-line-indent: 2em)
-
-      #fake-par
-      
+      #set text(size: 字号.五号, font: fonts.黑体, weight: "bold")
+      摘要 
+      #set text(size: 字号.五号, font: fonts.楷体, weight: "regular")
       #body
     ]
 
-    #v(1em)
-
-    *关键词*：#(("",)+ keywords.intersperse("；")).sum()
+    #[
+      #set text(size: 字号.五号, font: fonts.黑体, weight: "bold")
+    *关键词*：
+      #set text(size: 字号.五号, font: fonts.楷体, weight: "regular")
+    #(("",)+ keywords.intersperse("；")).sum()
+    ]
   ]
 }

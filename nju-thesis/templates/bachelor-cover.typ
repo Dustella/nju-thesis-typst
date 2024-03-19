@@ -25,7 +25,7 @@
   // 1.  默认参数
   fonts = 字体 + fonts
   info = (
-    title: ("基于 Typst 的", "南京大学学位论文"),
+    title: ("基于 Typst 的", "南京信息工程大学学位论文"),
     grade: "20XX",
     student-id: "1234567890",
     author: "张三",
@@ -106,20 +106,21 @@
   set align(center)
 
   // 匿名化处理去掉封面标识
-  if (anonymous) {
-    v(70pt)
-  } else {
-    // 封面图标
-    v(6pt)
-    image("../assets/vi/nju-emblem.svg", width: 2.38cm)
-    v(22pt)
-    // 调整一下左边的间距
-    pad(image("../assets/vi/nju-name.svg", width: 10.5cm), left: 0.4cm)
-    v(20pt)
-  }
 
   // 将中文之间的空格间隙从 0.25 em 调整到 0.5 em
-  text(size: 字号.一号, font: fonts.宋体, spacing: 200%, weight: "bold")[本 科 毕 业 论 文]
+  image("../assets/vi/nuist-banner.svg", width: 12.38cm)
+
+  v(6pt)
+  
+  text(size: 字号.一号, font: fonts.宋体, spacing: 200%, weight: "bold")[本科生毕业论文(设计)]
+
+
+    // 封面图标
+    v(22pt)
+    // 调整一下左边的间距
+    pad(image("../assets/vi/nuist-logo.png", width: 3.5cm), left: 0.4cm)
+    v(20pt)
+  
   
   if (anonymous) {
     v(132pt)

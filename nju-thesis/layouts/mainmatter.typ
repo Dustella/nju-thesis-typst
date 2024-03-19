@@ -15,17 +15,17 @@
   spacing: 1.25em,
   justify: true,
   first-line-indent: 2em,
-  numbering: custom-numbering.with(first-level: "第一章 ", depth: 3, "1.1 "),
+  numbering: custom-numbering.with( depth: 3, "1.1 "),
   // 正文字体与字号参数
   text-args: auto,
   // 标题字体与字号
-  heading-font: auto,
-  heading-size: (字号.四号,),
+  heading-font: (字体.黑体, 字体.黑体, 字体.宋体, 字体.宋体),
+  heading-size: (字号.四号, 字号.五号, 字号.五号, 字号.五号),
   heading-weight: ("regular",),
   heading-top-vspace: (20pt, 4pt),
   heading-bottom-vspace: (20pt, 8pt),
-  heading-pagebreak: (true, false),
-  heading-align: (center, auto),
+  heading-pagebreak: (false, false),
+  heading-align: (auto, auto),
   // 页眉
   header-render: auto,
   header-vspace: 0em,
@@ -47,7 +47,7 @@
   // 1.  默认参数
   fonts = 字体 + fonts
   if (text-args == auto) {
-    text-args = (font: fonts.宋体, size: 字号.小四)
+    text-args = (font: fonts.宋体, size: 字号.五号)
   }
   // 1.1 字体与字号
   if (heading-font == auto) {

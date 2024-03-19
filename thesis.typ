@@ -1,4 +1,8 @@
 #import "nju-thesis/template.typ": documentclass, tablex, fig, tlt, indent
+#import "nju-thesis/utils/style.typ": 字号, 字体
+#import "nju-thesis/utils/indent.typ": fake-par
+#import "nju-thesis/utils/invisible-heading.typ": invisible-heading
+
 
 // 双面模式，会加入空白页，便于打印
 #let twoside = false
@@ -21,7 +25,7 @@
     student-id: "1234567890",
     author: "张三",
     author-en: "Ming Xing",
-    department: "某学院",
+    department: "计算机院",
     department-en: "School of Chemistry and Chemical Engineering",
     major: "某专业",
     major-en: "Chemistry",
@@ -42,18 +46,15 @@
 // 封面页
 #cover()
 
-// 声明页
-#decl-page()
-
-
 // 前言
 #show: preface
+// 目录
+#outline-page()
 
 // 中文摘要
 #abstract(
   keywords: ("我", "就是", "测试用", "关键词")
-)[
-  中文摘要
+)[  欢迎阅读 Typst 的中文文档！Typst 是为科学写作而诞生的基于标记的排版系统。 它被设计之初就是作为一种替代品，用于替代像 LaTeX 这样的高级工具，又或者是像 Word 和 Google Docs 这样的简单工具。 我们对 Typst 的目标是构建一个功能强大的排版工具，并且让用户可以愉快地使用它。
 ]
 
 // 英文摘要
@@ -63,23 +64,12 @@
   English abstract
 ]
 
-// 目录
-#outline-page()
 
-// 插图目录
-#list-of-figures()
 
-// 表格目录
-#list-of-tables()
 
 // 正文
 #show: mainmatter
 
-// 符号表
-#notation[
-  / DFT: 密度泛函理论 (Density functional theory)
-  / DMRG: 密度矩阵重正化群密度矩阵重正化群密度矩阵重正化群 (Density-Matrix Reformation-Group)
-]
 
 = 基本功能
 
@@ -187,10 +177,25 @@ def add(x, y):
 #if (twoside) {
   pagebreak() + " "
 }
+
+
+#v(字号.五号)
+
 // 参考文献
+#[
+
+#set text(font: 字体.黑体, size: 字号.四号)
+#set par(first-line-indent: 0em)
+
+#heading(numbering: none, level: 1)[参考文献]
+#fake-par
+
+#set text(font: 字体.宋体, size: 字号.小五)
 #bibliography(("bibs/ex01.bib", "bibs/ex02.bib"),
-  style: "ieee"
+  style: "gb-7714-2005-numeric",
+  title: none
 )
+]
 
 
 // 致谢

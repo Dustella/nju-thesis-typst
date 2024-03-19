@@ -10,6 +10,8 @@
   show-equation: i-figured.show-equation.with(numbering: "(A.1)"),
   it,
 ) = {
+    pagebreak(weak: true)
+
   set heading(numbering: numbering)
   counter(heading).update(0)
   // 设置 figure 的编号

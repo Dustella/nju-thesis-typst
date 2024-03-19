@@ -52,38 +52,37 @@
     #show par: set block(spacing: spacing)
 
     // 标记一个不可见的标题用于目录生成
-    #invisible-heading(level: 1, outlined: outlined, outline-title)
+    // #invisible-heading(level: 1, outlined: outlined, outline-title)
 
     #align(center)[
-      #set text(size: 字号.小二, weight: "bold")
+      #set text(size: 字号.三号, weight: "bold")
 
-      #double-underline[南京大学本科生毕业论文（设计、作品）英文摘要]
+      #info-value("title-en", (("",)+ info.title-en).sum())
+      #v(字号.五号)
     ]
-
-    #v(6pt)
-
-    THESIS: #info-value("title-en", (("",)+ info.title-en).sum())
-
-    DEPARTMENT: #info-value("department-en", info.department-en)
-
-    SPECIALIZATION: #info-value("major-en", info.major-en)
-
-    UNDERGRADUATE: #info-value("author-en", info.author-en)
-
-    MENTOR: #info-value("supervisor-en", info.supervisor-en) #(if info.supervisor-ii-en != "" [#h(1em) #info-value("supervisor-ii-en", info.supervisor-ii-en)])
-
-    ABSTRACT:
-
+    #align(center)[
+      #set text(size: 字号.四号, font: fonts.宋体)
+      #info-value("author-en", info.author-en)
+    ]
+        // 学院
+    #align(center)[
+      #set text(size: 字号.小五, font: fonts.宋体)
+      #info-value("department-en", info.department-en), NUIST, Nanjing 210044, China
+    ]
     #[
-      #set par(first-line-indent: 2em)
 
       #fake-par
-      
+
+      #set text(size: 字号.五号, weight: "bold")
+      Abstract: 
+      #set text(size: 字号.五号, weight: "regular")
       #body
     ]
 
-    #v(1em)
-
-    KEYWORDS: #(("",)+ keywords.intersperse("; ")).sum()
+    #[
+      #set text(size: 字号.五号, weight: "bold")
+    Key words:      #set text(size: 字号.五号, weight: "regular")
+     #(("",)+ keywords.intersperse("; ")).sum()
+    ]
   ]
 }

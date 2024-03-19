@@ -25,7 +25,8 @@
   // 1.  默认参数
   fonts = 字体 + fonts
   info = (
-    title: ("基于 Typst 的", "南京信息工程大学学位论文"),
+    title: "基于 Typst 的南京信息工程大学学位论文",
+    super-title: "本科生毕业论文(设计)",
     grade: "20XX",
     student-id: "1234567890",
     author: "张三",
@@ -48,23 +49,23 @@
   }
 
   // 3.  内置辅助函数
-  let info-key(body) = {
+  let info-key(body, font: fonts.宋体) = {
     rect(
       width: 100%,
       inset: info-inset,
       stroke: none,
-      text(font: fonts.楷体, size: 字号.三号, body),
+      text(font: font, size: 字号.三号, body),
     )
   }
 
-  let info-value(key, body) = {
+  let info-value(key, body, font: fonts.宋体) = {
     set align(center)
     rect(
       width: 100%,
       inset: info-inset,
       stroke: (bottom: stoke-width + black),
       text(
-        font: fonts.宋体,
+        font: font,
         size: 字号.三号,
         weight: if (key in bold-info-keys) { bold-level } else { "regular" },
         bottom-edge: "descender",
@@ -73,7 +74,7 @@
     )
   }
 
-  let info-long-value(key, body) = {
+  let info-long-value(key, body, font: fonts.宋体) = {
     colspanx(3,
       info-value(
         key,
@@ -81,8 +82,10 @@
           "██████████"
         } else {
           body
-        }
+        },
+        font: font,
       )
+
     )
   }
 
@@ -106,55 +109,58 @@
   set align(center)
 
   // 匿名化处理去掉封面标识
+  v(33pt)
+
 
   // 将中文之间的空格间隙从 0.25 em 调整到 0.5 em
-  image("../assets/vi/nuist-banner.svg", width: 12.38cm)
-
-  v(6pt)
+  image("../assets/vi/nuist-banner.svg", width: 10.38cm)
   
-  text(size: 字号.一号, font: fonts.宋体, spacing: 200%, weight: "bold")[本科生毕业论文(设计)]
+  text(size: 字号.一号, font: fonts.黑体, spacing: 200%, weight: "bold", 
+    info.super-title
+  )
 
 
     // 封面图标
     v(22pt)
     // 调整一下左边的间距
-    pad(image("../assets/vi/nuist-logo.png", width: 3.5cm), left: 0.4cm)
-    v(20pt)
+    pad(image("../assets/vi/nuist-logo.png", width: 2.5cm), left: 0.4cm)
   
+    v(50pt)
   
-  if (anonymous) {
-    v(132pt)
-  } else {
-    v(44pt)
-  }
 
-  block(width: 300pt, gridx(
+
+  block(width: 400pt, gridx(
     columns: (info-key-width, 1fr, info-key-width, 1fr),
     column-gutter: column-gutter,
     row-gutter: row-gutter,
+    info-key("题     目", font:fonts.黑体), 
+    info-long-value("title", info.title.at(0), font: fonts.黑体)
+  ))
+
+  v(30pt)
+
+  block(width: 250pt, gridx(
+    columns: (info-key-width, 1fr, info-key-width, 1fr),
+    column-gutter: column-gutter,
+    row-gutter: row-gutter,
+    info-key("学生姓名"),
+    info-long-value("author", info.author),
+    info-key("学　　号"),
+    info-long-value("student-id", info.student-id),
     info-key("院　　系"),
     info-long-value("department", info.department),
     info-key("专　　业"),
     info-long-value("major", info.major),
-    info-key("题　　目"),
-    ..info.title.map((s) => info-long-value("title", s)).intersperse(info-key("　")),
-    info-key("年　　级"),
-    info-short-value("grade", info.grade),
-    info-key("学　　号"),
-    info-short-value("student-id", info.student-id),
-    info-key("学生姓名"),
-    info-long-value("author", info.author),
     info-key("指导教师"),
-    info-short-value("supervisor", info.supervisor.at(0)),
-    info-key("职　　称"),
-    info-short-value("supervisor", info.supervisor.at(1)),
-    ..(if info.supervisor-ii != () {(
-      info-key("第二导师"),
-      info-short-value("supervisor-ii", info.supervisor-ii.at(0)),
-      info-key("职　　称"),
-      info-short-value("supervisor-ii", info.supervisor-ii.at(1)),
-    )} else {()}),
-    info-key("提交日期"),
-    info-long-value("submit-date", info.submit-date),
+    info-long-value("supervisor", info.supervisor.at(0)),
+    // info-key("提交日期"),
+    // info-long-value("submit-date", info.submit-date),
   ))
+
+  v(70pt)
+
+  text(size: 字号.三号, font: fonts.黑体, spacing: 200%, weight: "bold",
+    info.submit-date
+  )
+
 }

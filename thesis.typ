@@ -19,21 +19,22 @@
   // 可自定义字体，先英文字体后中文字体，应传入「宋体」、「黑体」、「楷体」、「仿宋」、「等宽」
   // fonts: (楷体: ("Times New Roman", "FZKai-Z03S")),
   info: (
-    title: ("基于 Typst 的", "南京大学学位论文"),
+    title: "基于 Typst 的 NUIST 本科学位论文",
     title-en: "My Title in English",
     grade: "20XX",
     student-id: "1234567890",
     author: "张三",
     author-en: "Ming Xing",
     department: "计算机院",
-    department-en: "School of Chemistry and Chemical Engineering",
-    major: "某专业",
-    major-en: "Chemistry",
+    department-en: "School of Computing",
+    major: "计算机科学与技术",
+    major-en: "Computer Science",
     supervisor: ("李四", "教授"),
     supervisor-en: "Professor My Supervisor",
     // supervisor-ii: ("王五", "副教授"),
     // supervisor-ii-en: "Professor My Supervisor",
-    submit-date: datetime.today(),
+    submit-date: "二零二三 年 五 月 六 日",
+    super-title: "本科生毕业设计"
   ),
 )
 
@@ -63,6 +64,7 @@
 )[
   English abstract
 ]
+#pagebreak()
 
 
 
@@ -102,6 +104,25 @@
 
 引用@tbl:timing，引用@tbl:timing-tlt，以及@fig:nju-logo。引用图表时，表格和图片分别需要加上 `tbl:`和`fig:` 前缀才能正常显示编号。以及这里使用 `fig` 函数替代原生 `figure` 函数以支持将 `tablex` 作为表格来识别。
 
+#fig(
+  tablex(
+    align: center + horizon,
+    columns: 4,
+    [t], [1], [2], [3],
+    [y], [0.3s], [0.4s], [0.8s],
+  ),
+  caption: [常规表],
+) <timing1>
+
+#fig(
+  tlt(
+    columns: 4,
+    [t], [1], [2], [3],
+    [y], [0.3s], [0.4s], [0.8s],
+  ),
+  caption: [三线表],
+) <timing-tlt1>
+
 #align(center, (stack(dir: ltr)[
   #fig(
     tablex(
@@ -110,7 +131,7 @@
       [t], [1], [2], [3],
       [y], [0.3s], [0.4s], [0.8s],
     ),
-    caption: [常规表],
+    caption: [堆叠常规表],
   ) <timing>
 ][
   #h(50pt)
@@ -121,7 +142,7 @@
       [t], [1], [2], [3],
       [y], [0.3s], [0.4s], [0.8s],
     ),
-    caption: [三线表],
+    caption: [堆叠三线表],
   ) <timing-tlt>
 ]))
 
